@@ -8,18 +8,21 @@ public abstract class Item {
     private String nome;
     private Integer codigo;
     private Integer valor;
+    private Integer espaco;
     private String raridade;
     private Integer nivelRaridade;
     private Integer quantidadeItem;
+    private Integer contador;
 
     //Construtor
-    public Item(String nome, Integer codigo, Integer valor, String raridade, Integer nivelRaridade, Integer quantidadeItem) {
+    public Item(String nome, Integer codigo, Integer valor, Integer espaco, String raridade) {
         this.nome = nome;
         this.codigo = codigo;
         this.valor = valor;
+        this.espaco = espaco;
         this.raridade = raridade;
-        this.nivelRaridade = nivelRaridade;
-        this.quantidadeItem = quantidadeItem;
+        this.quantidadeItem = 0;
+        this.contador = 0;
     }
 
     //Métodos
@@ -29,14 +32,12 @@ public abstract class Item {
     }
 
     //ToString
-
-
     @Override
     public String toString() {
-        return  "Nome: " + nome +
-                "Código: " + codigo +
-                "Valor: " + valor;
+        return  "\nValor: " + valor +
+                "\nQt: " + quantidadeItem;
     }
+
 
     //Getter
     public String getNome() {
@@ -63,6 +64,14 @@ public abstract class Item {
         return raridade;
     }
 
+    public Integer getEspaco() {
+        return espaco;
+    }
+
+    public Integer getContador() {
+        return contador;
+    }
+
     //Setter
     public void setNome(String nome) {
         this.nome = nome;
@@ -86,5 +95,13 @@ public abstract class Item {
 
     public void setRaridade(String raridade) {
         this.raridade = raridade;
+    }
+
+    public void setEspaco(Integer espaco) {
+        this.espaco = espaco;
+    }
+
+    public void setContador(Integer contador) {
+        this.contador = contador;
     }
 }

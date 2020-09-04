@@ -23,7 +23,7 @@ public abstract class Personagem {
     }
 
     //Método
-    public abstract void getAtacar(Heroi heroi, Vilao vilao);
+
 
     //Getter
     public String getNome() {
@@ -55,6 +55,8 @@ public abstract class Personagem {
     }
 
 
+
+
     //Setter
     public void setNome(String nome) {
         this.nome = nome;
@@ -83,4 +85,5 @@ public abstract class Personagem {
     public void setDefesa(Double defesa) {
         this.defesa = defesa;
     }
+
 }

@@ -7,15 +7,24 @@ public class Pocao extends Item{
     private Integer valorAtribuir;
 
     //Construtor
-    public Pocao(String nome, Integer codigo, Integer valor, String raridade, Integer nivelRaridade, Integer quantidadeItem, String tipo, Integer valorAtribuir) {
-        super(nome, codigo, valor, raridade, nivelRaridade, quantidadeItem);
+    public Pocao(String nome, Integer codigo, Integer valor, Integer espaco, String raridade, String tipo, Integer valorAtribuir) {
+        super(nome, codigo, valor, espaco, raridade);
         this.tipo = tipo;
         this.valorAtribuir = valorAtribuir;
     }
 
+    //ToString
+
+
+    @Override
+    public String toString() {
+        return "\nPocao" +
+                "\nTipo: " + tipo +
+                "\nValor atribuir: " + valorAtribuir +
+                super.toString();
+    }
 
     //Getter
-
     public String getTipo() {
         return tipo;
     }
@@ -25,7 +34,6 @@ public class Pocao extends Item{
     }
 
     //Setter
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }

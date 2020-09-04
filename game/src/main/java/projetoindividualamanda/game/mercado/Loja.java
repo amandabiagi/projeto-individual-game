@@ -5,7 +5,7 @@ import projetoindividualamanda.game.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loja {
+public abstract class Loja {
 
     //Atributos
     private List<Item> estoque;

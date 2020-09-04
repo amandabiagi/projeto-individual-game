@@ -8,15 +8,12 @@ public class Lutador extends Heroi{
 
     //Atributos
     private Double danoFisico;
-    private String classe;
 
+    //Construtor
     public Lutador(String nome, String sexo) {
-        super(nome,sexo);
+        super(nome,sexo,"Lutador");
         this.danoFisico = 3.0;
-        this.classe = "Lutador";
     }
-
-    //Método
 
     //Getter
     public Double getDanoFisico() {

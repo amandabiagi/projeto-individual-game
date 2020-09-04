@@ -2,34 +2,57 @@ package projetoindividualamanda.game.personagem;
 
 import projetoindividualamanda.game.item.Item;
 import projetoindividualamanda.game.item.Pocao;
+import projetoindividualamanda.game.mercado.Loja;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Heroi extends Personagem {
+
 
     //Atributos
     private String sexo;
     private Item recurso;
     private Double xpMeta;
     private Integer saquinhoOuro;
+    private Boolean sorte;
+    private String classe;
     private List<Item> bag;
 
-    public Heroi(String nome, String sexo) {
-        super(nome, 1, 0.0, 10.0, 10.0, 2.0, 1.0);
+    public Heroi(String nome, String sexo, String classe) {
+        super(nome, 1, 0.0, 10.0, 10.0, 1.0, 1.0);
         this.sexo = sexo;
         this.recurso = null;
         this.xpMeta = 100.0;
         this.saquinhoOuro = 0;
-        this.bag = bag;
+        this.sorte = false;
+        this.bag = new ArrayList<>();
     }
 
     //Método
+    public void vitoria(Vilao vilao){
+        setXp(getXp() + vilao.getXp());
+        levelUp();
+        vilao.quantOuro();
+        setSaquinhoOuro(getSaquinhoOuro() + vilao.getOuroDrop());
+        vilao.getItemDrop().chancesDeConquista();
+
+        if (vilao.getItemDrop().getRaridade() == "Comum" && vilao.getItemDrop().getNivelRaridade() <= 50) {
+            adicionarItemBag(vilao.getItemDrop());
+        } else if (vilao.getItemDrop().getRaridade() == "Raro" && vilao.getItemDrop().getNivelRaridade() > 50 && vilao.getItemDrop().getNivelRaridade() <= 85) {
+            adicionarItemBag(vilao.getItemDrop());
+        } else if(vilao.getItemDrop().getRaridade() == "Epico" && vilao.getItemDrop().getNivelRaridade() > 85 && vilao.getItemDrop().getNivelRaridade() <= 100){
+            adicionarItemBag(vilao.getItemDrop());
+        }
+    }
+
     public void atributosLevel() {
-        setVidaMaxima(getVidaMaxima() * 0.2);
-        setVida(getVida() * 0.3);
-        setDanoBase(getDanoBase() * 0.1);
-        setDefesa(getDefesa() * 0.03);
-        setXpMeta(getXpMeta() * 0.9);
+        setVidaMaxima(getVidaMaxima() * 1.2);
+        setVida(getVida() * 1.3);
+        setDanoBase(getDanoBase() * 1.9);
+        setDefesa(getDefesa() * 1.03);
+        setXpMeta(getXpMeta() * 1.9);
     }
 
     public void levelUp(){
@@ -40,11 +63,11 @@ public class Heroi extends Personagem {
     }
 
     public void adicionarItemBag(Item item){
-        bag.add(item);
         item.setQuantidadeItem(item.getQuantidadeItem() + 1);
+        bag.add(item);
     }
 
-    public void comprarItem(Item item){
+    public void comprarItem(Item item, Loja loja){
         if (getSaquinhoOuro() >= item.getValor()){
             adicionarItemBag(item);
             setSaquinhoOuro(getSaquinhoOuro() - item.getValor());
@@ -71,24 +94,65 @@ public class Heroi extends Personagem {
             if (pocao instanceof Pocao){
                 atribuirPocao(pocao);
                 bag.remove(pocao);
-                cont = getBag().size();
+                //cont = getBag().size();
                 return;
             }
         }
+        System.out.println("Sem poção");
     }
 
     public Double porcentagemVida(){
         return ((getVida()/getVidaMaxima()) * 100);
     }
 
-    public List<Item> exibirBag(){
-        return bag;
+    public void exibirBag(){
+        System.out.println("\nBAG");
+        for (Item item : bag) {
+            if (item.getContador() == 0) {
+                item.setContador(1);
+            }
+        }
+        for (Item item : bag){
+            if (bag.isEmpty()) {
+                System.out.println("BAG vazia");
+            }else {
+                if (item.getContador() == 1) {
+                    System.out.println(item.getNome() + " Quantidade: " + item.getQuantidadeItem());
+                    item.setContador(0);
+                }
+            }
+        }
     }
 
-    @Override
-    public void getAtacar(Heroi heroi, Vilao vilao) {
-        vilao.setVida(((vilao.getVida() - heroi.getDanoBase()) + vilao.getDefesa()));
+    public void exibirHeroi(){
+        System.out.println(String.format("%s lvl:%d \nDano base: %.2f Defesa: %.2f \nVida: %.2f%s \nGold: %d",
+                getNome(),getLevel(),getDanoBase(),getDefesa(),porcentagemVida(),"%",getSaquinhoOuro()));
     }
+
+    public void sortear(){
+        Integer numero = 0;
+        Random sortear = new Random();
+        numero = sortear.nextInt(100);
+        if (numero <= 50) {
+            sorte = true;
+        }
+    }
+
+    public void lutar(Vilao vilao){
+        sortear();
+        do {
+            if (sorte) {
+                vilao.setVida(((vilao.getVida() - getDanoBase()) + vilao.getDefesa()));
+            }else {
+                setVida(((getVida() - vilao.getDanoBase()) + getDefesa()));
+            }
+        }while (getVida() <= 0 || vilao.getVida() <= 0);
+        if (getVida() > 0){
+            vitoria(vilao);
+            levelUp();
+        }
+    }
+
 
     //Getter
     public String getSexo() {
@@ -105,6 +169,14 @@ public class Heroi extends Personagem {
 
     public List<Item> getBag() {
         return bag;
+    }
+
+    public Boolean getSorte() {
+        return sorte;
+    }
+
+    public String getClasse() {
+        return classe;
     }
 
     public Item getRecurso() {
@@ -128,7 +200,16 @@ public class Heroi extends Personagem {
         this.bag = bag;
     }
 
+    public void setSorte(Boolean sorte) {
+        this.sorte = sorte;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
     public void setRecurso(Item recurso) {
         this.recurso = recurso;
     }
+
 }
