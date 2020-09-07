@@ -17,8 +17,11 @@ public class LojaArma extends Loja{
         super.adicionarItemLoja(i);
     }
 
+
     @Override
     public void exibirItemLoja() {
         super.exibirItemLoja();
     }
+
+
 }

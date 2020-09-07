@@ -1,5 +1,7 @@
 package projetoindividualamanda.game.personagem;
 
+import projetoindividualamanda.game.item.Item;
+
 import java.util.List;
 public abstract class Personagem {
 
@@ -24,6 +26,7 @@ public abstract class Personagem {
 
     //Método
 
+    public abstract Double calcularDano();
 
     //Getter
     public String getNome() {

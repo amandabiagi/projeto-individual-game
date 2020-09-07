@@ -31,6 +31,13 @@ public class Heroi extends Personagem {
     }
 
     //Método
+
+
+    @Override
+    public Double calcularDano() {
+        return getDanoBase();
+    }
+
     public void vitoria(Vilao vilao){
         setXp(getXp() + vilao.getXp());
         levelUp();
@@ -142,14 +149,13 @@ public class Heroi extends Personagem {
         sortear();
         do {
             if (sorte) {
-                vilao.setVida(((vilao.getVida() - getDanoBase()) + vilao.getDefesa()));
+                vilao.setVida(((vilao.getVida() -  calcularDano()) + vilao.getDefesa()));
             }else {
-                setVida(((getVida() - vilao.getDanoBase()) + getDefesa()));
+                setVida(((getVida() - vilao.calcularDano()) + getDefesa()));
             }
         }while (getVida() <= 0 || vilao.getVida() <= 0);
         if (getVida() > 0){
             vitoria(vilao);
-            levelUp();
         }
     }
 

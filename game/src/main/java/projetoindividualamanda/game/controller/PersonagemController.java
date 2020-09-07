@@ -33,7 +33,7 @@ public class PersonagemController {
         personagens.add(vilao);
         return ResponseEntity.status(201).build();
     }
-    
+
 
     @GetMapping
     public ResponseEntity mostrarTodos(){
@@ -43,4 +43,17 @@ public class PersonagemController {
             return ResponseEntity.ok(personagens);
         }
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deletarPersonagem(@PathVariable Integer id){
+        if (personagens.size() >= id){
+            personagens.remove(id - 1);
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.status(404).build();
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity alterarPersonagem(@PathVariable Integer id @RequestBody );
 }

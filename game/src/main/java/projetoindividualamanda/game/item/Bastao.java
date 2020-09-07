@@ -3,12 +3,11 @@ package projetoindividualamanda.game.item;
 public class Bastao extends Item{
 
     //Atributo
-    private Double valorAtribuir;
+
     private Integer velocidadeAtaque;
 
-    public Bastao(String nome, Integer codigo, Integer valor, Integer espaco, String raridade, Double valorAtribuir, Integer velocidadeAtaque) {
-        super(nome, codigo, valor, espaco, raridade);
-        this.valorAtribuir = valorAtribuir;
+    public Bastao(String nome, Integer codigo, Integer valorAtribuir, Integer valor, Integer espaco, String raridade, Integer velocidadeAtaque) {
+        super(nome, codigo, valorAtribuir, valor, espaco, raridade);
         this.velocidadeAtaque = velocidadeAtaque;
     }
 }

@@ -18,10 +18,15 @@ public class Vilao extends Personagem{
         this.xp = xp;
         this.ouro = ouro;
         this.ouroDrop = 0 ;
-        this.itemDrop = null;
+        this.itemDrop = itemDrop;
     }
 
     //Métodos
+    @Override
+    public Double calcularDano() {
+        return getDanoBase() + (getItemDrop().getValorAtribuir() - (getItemDrop().getValorAtribuir() + 0.30));
+    }
+
     public void quantOuro(){
         Random geradorMoeda = new Random();
         ouroDrop = geradorMoeda.nextInt(ouro);

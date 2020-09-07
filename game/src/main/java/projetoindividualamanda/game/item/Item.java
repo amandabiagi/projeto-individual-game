@@ -7,6 +7,7 @@ public abstract class Item {
     //Atributos
     private String nome;
     private Integer codigo;
+    private Integer valorAtribuir;
     private Integer valor;
     private Integer espaco;
     private String raridade;
@@ -15,9 +16,10 @@ public abstract class Item {
     private Integer contador;
 
     //Construtor
-    public Item(String nome, Integer codigo, Integer valor, Integer espaco, String raridade) {
+    public Item(String nome, Integer codigo,Integer valorAtribuir, Integer valor, Integer espaco, String raridade) {
         this.nome = nome;
         this.codigo = codigo;
+        this.valorAtribuir = valorAtribuir;
         this.valor = valor;
         this.espaco = espaco;
         this.raridade = raridade;
@@ -30,6 +32,7 @@ public abstract class Item {
         Random sortearRaridade = new Random();
         nivelRaridade = sortearRaridade.nextInt(100);
     }
+
 
     //ToString
     @Override
@@ -72,6 +75,10 @@ public abstract class Item {
         return contador;
     }
 
+    public Integer getValorAtribuir() {
+        return valorAtribuir;
+    }
+
     //Setter
     public void setNome(String nome) {
         this.nome = nome;
@@ -103,5 +110,9 @@ public abstract class Item {
 
     public void setContador(Integer contador) {
         this.contador = contador;
+    }
+
+    public void setValorAtribuir(Integer valorAtribuir) {
+        this.valorAtribuir = valorAtribuir;
     }
 }

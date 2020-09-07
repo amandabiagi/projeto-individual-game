@@ -14,7 +14,9 @@ public class Teste {
     public static void main(String[] args) {
 
         Mago mago = new Mago("José","Feminino");
+
         Pocao pocaoVida = new Pocao("Pocao",100,3,1,"Comum","vida",3);
+
         Vilao allan = new Vilao("Allan",2,100.0,10.0,10.0,10.0,1.0,10,pocaoVida);
         LojaPocao lojinhaDasMagias = new LojaPocao();
 
@@ -26,6 +28,8 @@ public class Teste {
 
         mago.beberPocao(pocaoVida);
 
+        mago.exibirBag();
+
         mago.exibirHeroi();
 
         System.out.println("Lutando");
@@ -33,7 +37,8 @@ public class Teste {
         mago.lutar(allan);
         mago.lutar(allan);
         mago.lutar(allan);
-        mago.lutar(allan);
+
+        mago.exibirBag();
 
         System.out.println("bebendo 3 poções");
         mago.beberPocao(pocaoVida);

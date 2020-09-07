@@ -15,6 +15,14 @@ public class Lutador extends Heroi{
         this.danoFisico = 3.0;
     }
 
+    //Método
+
+
+    @Override
+    public Double calcularDano() {
+        return danoFisico + getDanoFisico();
+    }
+
     //Getter
     public Double getDanoFisico() {
         return danoFisico;

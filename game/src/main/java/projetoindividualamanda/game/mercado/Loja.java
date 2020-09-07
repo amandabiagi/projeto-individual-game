@@ -17,9 +17,10 @@ public abstract class Loja {
     }
 
     //Métodos
-    public void adicionarItemLoja(Item i){
-        estoque.add(i);
+    public void adicionarItemLoja(Item item){
+        estoque.add(item);
     }
+
 
     public void exibirItemLoja(){
         System.out.println("Lojinha");
@@ -27,4 +28,5 @@ public abstract class Loja {
             System.out.println(i);
         }
     }
+
 }
