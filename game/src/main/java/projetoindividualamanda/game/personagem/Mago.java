@@ -19,6 +19,16 @@ public class Mago extends Heroi{
         return getDanoBase() + getDanoMagico();
     }
 
+    //ToString
+
+
+    @Override
+    public String toString() {
+        return "Mago{" +
+                "danoMagico=" + danoMagico +
+                '}';
+    }
+
     //Getter
     public Double getDanoMagico() {
         return danoMagico;

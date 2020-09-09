@@ -20,7 +20,17 @@ public class Lutador extends Heroi{
 
     @Override
     public Double calcularDano() {
-        return danoFisico + getDanoFisico();
+        return danoFisico + getDanoBase();
+    }
+
+    //ToString
+
+
+    @Override
+    public String toString() {
+        return "Lutador{" +
+                "danoFisico=" + danoFisico +
+                '}';
     }
 
     //Getter

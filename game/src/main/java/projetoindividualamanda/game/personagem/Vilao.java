@@ -24,7 +24,8 @@ public class Vilao extends Personagem{
     //Métodos
     @Override
     public Double calcularDano() {
-        return getDanoBase() + (getItemDrop().getValorAtribuir() - (getItemDrop().getValorAtribuir() + 0.30));
+        return (getDanoBase() + (getItemDrop().getValorAtribuir() - (getItemDrop().getValorAtribuir() * 0.30)));
+
     }
 
     public void quantOuro(){
@@ -33,6 +34,18 @@ public class Vilao extends Personagem{
         setOuroDrop(ouroDrop);
     }
 
+    //ToString
+
+
+    @Override
+    public String toString() {
+        return "Vilao{" +
+                "xp=" + xp +
+                ", ouro=" + ouro +
+                ", ouroDrop=" + ouroDrop +
+                ", itemDrop=" + itemDrop +
+                '}';
+    }
 
     //Getter
     public Double getXp() {

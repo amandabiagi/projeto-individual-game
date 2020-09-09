@@ -33,14 +33,12 @@ public abstract class Item {
         nivelRaridade = sortearRaridade.nextInt(100);
     }
 
-
     //ToString
     @Override
     public String toString() {
         return  "\nValor: " + valor +
                 "\nQt: " + quantidadeItem;
     }
-
 
     //Getter
     public String getNome() {

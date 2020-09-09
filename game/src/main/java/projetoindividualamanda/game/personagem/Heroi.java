@@ -21,7 +21,7 @@ public class Heroi extends Personagem {
     private List<Item> bag;
 
     public Heroi(String nome, String sexo, String classe) {
-        super(nome, 1, 0.0, 10.0, 10.0, 1.0, 1.0);
+        super(nome, 1, 0.0, 10.0, 10.0, 10.0, 1.0);
         this.sexo = sexo;
         this.recurso = null;
         this.xpMeta = 100.0;
@@ -56,7 +56,11 @@ public class Heroi extends Personagem {
 
     public void atributosLevel() {
         setVidaMaxima(getVidaMaxima() * 1.2);
-        setVida(getVida() * 1.3);
+        if(getVida() * 1.3 <= getVidaMaxima()) {
+            setVida(getVida() * 1.3);
+        }else{
+            setVida(getVidaMaxima());
+        }
         setDanoBase(getDanoBase() * 1.9);
         setDefesa(getDefesa() * 1.03);
         setXpMeta(getXpMeta() * 1.9);
@@ -142,23 +146,51 @@ public class Heroi extends Personagem {
         numero = sortear.nextInt(100);
         if (numero <= 50) {
             sorte = true;
+        }else{
+            sorte = false;
         }
     }
 
-    public void lutar(Vilao vilao){
+    public void lutar(Vilao vilao) {
         sortear();
-        do {
+        while (getVida() > 0 && vilao.getVida() > 0) {
             if (sorte) {
-                vilao.setVida(((vilao.getVida() -  calcularDano()) + vilao.getDefesa()));
-            }else {
-                setVida(((getVida() - vilao.calcularDano()) + getDefesa()));
+                vilao.setVida((vilao.getVida() - calcularDano()) + vilao.getDefesa());
+                //vilao.setVida(((vilao.getVida() -  calcularDano()) + vilao.getDefesa()));
+                if (vilao.getVida() > 0) {
+                    setVida((getVida() - vilao.calcularDano()) + getDefesa());
+                    //setVida((getVida() - vilao.calcularDano()) + getDefesa());
+                }
             }
-        }while (getVida() <= 0 || vilao.getVida() <= 0);
-        if (getVida() > 0){
+            if (!sorte) {
+                setVida((getVida() - vilao.calcularDano()) + getDefesa());
+                if (getVida() > 0) {
+                    vilao.setVida((vilao.getVida() - calcularDano()) + vilao.getDefesa());
+                }
+            }
+        }
+        if (getVida() > 0) {
             vitoria(vilao);
+        } else {
+            setVida(1.0);
+            System.out.println("Você morreu");
         }
     }
 
+    //ToString
+
+    @Override
+    public String toString() {
+        return "Heroi{" +
+                "sexo='" + sexo + '\'' +
+                ", recurso=" + recurso +
+                ", xpMeta=" + xpMeta +
+                ", saquinhoOuro=" + saquinhoOuro +
+                ", sorte=" + sorte +
+                ", classe='" + classe + '\'' +
+                ", bag=" + bag +
+                '}';
+    }
 
     //Getter
     public String getSexo() {
