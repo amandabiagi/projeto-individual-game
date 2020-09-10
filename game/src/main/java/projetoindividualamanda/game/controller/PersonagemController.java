@@ -3,10 +3,7 @@ package projetoindividualamanda.game.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projetoindividualamanda.game.item.Item;
-import projetoindividualamanda.game.personagem.Heroi;
-import projetoindividualamanda.game.personagem.Lutador;
-import projetoindividualamanda.game.personagem.Personagem;
-import projetoindividualamanda.game.personagem.Vilao;
+import projetoindividualamanda.game.personagem.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +13,11 @@ import java.util.List;
 public class PersonagemController {
 
     private List<Personagem> personagens = new ArrayList<>();
+    LojaController lojaController = new LojaController();
 
     @PostMapping("/magos")
-    public ResponseEntity adicionarMago(@RequestBody Heroi heroi) {
-        personagens.add(heroi);
+    public ResponseEntity adicionarMago(@RequestBody Mago mago) {
+        personagens.add(mago);
         return ResponseEntity.status(201).build();
     }
 
@@ -34,7 +32,16 @@ public class PersonagemController {
         personagens.add(vilao);
         return ResponseEntity.status(201).build();
     }
-
+//    @PutMapping("/{nome}/{idItem}")
+//    public ResponseEntity alterarVilao(@@PathVariable String nome, @PathVariable Integer idItem) {
+//        for (Vilao vilao : personagens) {
+//            if (vilao.getNome().equals(nome)) {
+//                vilao.setItemDrop(lojaController.getItens().get(idItem - 1));
+//                return ResponseEntity.status(201).build();
+//            }
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
 
     @GetMapping
     public ResponseEntity mostrarTodos() {
@@ -45,21 +52,13 @@ public class PersonagemController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deletarPersonagem(@PathVariable Integer id) {
         if (personagens.size() >= id) {
             personagens.remove(id - 1);
             return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(404).build();
         }
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity adicionarItemBag(@PathVariable Integer id, @RequestBody Personagem personagem) {
-        personagens.remove(id - 1);
-        personagens.add(id - 1, personagem);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(404).build();
     }
 
 }
